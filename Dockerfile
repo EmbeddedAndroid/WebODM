@@ -3,6 +3,7 @@ MAINTAINER Tyler Baker <forcedinductionz@gmail.com>
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH $PYTHONPATH:/webodm
+ENV LIBRARY_PATH=/usr/lib/aarch64-linux-gnu:/usr/lib
 
 # Prepare directory
 RUN mkdir /webodm
