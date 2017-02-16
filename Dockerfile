@@ -1,5 +1,5 @@
-FROM python:3.5
-MAINTAINER Piero Toffanin <pt@masseranolabs.com>
+FROM aarch64/python:3.5
+MAINTAINER Tyler Baker <forcedinductionz@gmail.com>
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH $PYTHONPATH:/webodm
@@ -18,8 +18,12 @@ RUN git submodule init
 RUN git submodule update
 
 # Install Node.js
-RUN curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs
+RUN \
+  curl https://nodejs.org/dist/v6.9.5/node-v6.9.5-linux-arm64.tar.xz > node-v6.9.5-linux-arm64.tar.xz && \
+  tar -C . -xaf node-v6.9.5-linux-arm64.tar.xz && \
+  rm node-v6.9.5-linux-arm64.tar.xz && \
+  cd node-v6.9.5-linux-arm64 && \
+  cp -R * /usr/local/
 
 # Configure use of testing branch of Debian
 RUN printf "Package: *\nPin: release a=stable\nPin-Priority: 900\n" > /etc/apt/preferences.d/stable.pref
